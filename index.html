@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<title>Birthday Flight ✈️🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <canvas id="scene"></canvas>
+
+  <div id="ui-root">
+
+    <!-- LOADING -->
+    <div id="loading-screen">
+      <div class="loading-plane">✈️</div>
+      <div class="loading-text">Menyiapkan penerbangan…</div>
+      <div class="loading-bar"><div class="loading-bar-fill" id="loading-fill"></div></div>
+    </div>
+
+    <!-- FLIGHT HUD -->
+    <div id="flight-hud" class="hidden">
+      <div id="hint-bubble" class="hint-bubble">Geser layar untuk terbang ✈️</div>
+      <div id="subtitle-box"><span id="subtitle-text"></span></div>
+      <div id="distance-wrap">
+        <div id="distance-label">Menuju portal…</div>
+        <div id="distance-bar"><div id="distance-fill"></div></div>
+      </div>
+    </div>
+
+    <audio id="bgm" preload="auto" loop src="assets/audio/music.mp3"></audio>
+
+    <!-- TAP TO START (unlocks audio + fullscreen gesture) -->
+    <div id="start-screen" class="hidden">
+      <div class="start-card">
+        <div class="start-emoji">✈️🎂✨</div>
+        <h1>Birthday Flight</h1>
+        <p>Terbang menembus portal ajaib menuju kue ulang tahunmu.</p>
+        <button id="start-btn" class="big-btn">Mulai Terbang 🚀</button>
+      </div>
+    </div>
+
+    <!-- PORTAL TRANSITION FLASH -->
+    <div id="flash-overlay"></div>
+
+    <!-- CANDLE / WISH UI -->
+    <div id="candle-ui" class="hidden">
+      <div id="wish-title" class="wish-text">✨ MAKE A WISH ✨</div>
+      <div id="blow-title" class="wish-text hidden">💨 BLOW THE CANDLES 💨</div>
+      <button id="mic-btn" class="pill-btn hidden">🎤 Izinkan Mic untuk Meniup</button>
+      <button id="blow-btn" class="big-btn hidden">💨 TIUP LILIN</button>
+    </div>
+
+    <!-- CELEBRATION -->
+    <div id="celebration-ui" class="hidden">
+      <div class="celebrate-text line1">🎉 HAPPY BIRTHDAY 🎉</div>
+      <div class="celebrate-text line2">MAKE A WISH ✨</div>
+      <div class="celebrate-text line3">SEMOGA SEMUA IMPIANMU<br/>MENJADI KENYATAAN ❤️</div>
+    </div>
+
+    <div id="confetti-layer"></div>
+
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
