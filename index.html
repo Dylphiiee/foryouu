@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-<title>Birthday Flight ✈️🎂</title>
+<title>Birthday Flight</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,55 +17,152 @@
 
     <!-- LOADING -->
     <div id="loading-screen">
-      <div class="loading-plane">✈️</div>
-      <div class="loading-text">Menyiapkan penerbangan…</div>
-      <div class="loading-bar"><div class="loading-bar-fill" id="loading-fill"></div></div>
+      <div class="loading-mark">
+        <i data-lucide="plane" class="loading-icon"></i>
+      </div>
+      <div class="loading-copy">
+        <div class="loading-text">Menyiapkan penerbangan</div>
+        <div class="loading-bar"><div class="loading-bar-fill" id="loading-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- SUBTITLE (independent of flight-hud so it can show during the cake scene too) -->
+    <div id="subtitle-box"><span id="subtitle-text"></span></div>
+
+    <!-- SKIP TO CAKE PHASE -->
+    <button id="skip-btn" class="skip-btn hidden" aria-label="Lewati ke fase kue">
+      <i data-lucide="fast-forward"></i>
+    </button>
+
+    <!-- PIN MODAL -->
+    <div id="pin-modal" class="hidden">
+      <div class="pin-card glass-panel">
+        <button id="pin-close-btn" class="pin-close-btn" aria-label="Tutup">
+          <i data-lucide="x"></i>
+        </button>
+        <i data-lucide="lock-keyhole" class="pin-lock-icon"></i>
+        <div class="pin-title">Masukkan PIN</div>
+        <p class="pin-desc">Lewati langsung ke fase kue</p>
+        <div id="pin-dots" class="pin-dots">
+          <span class="pin-dot"></span>
+          <span class="pin-dot"></span>
+          <span class="pin-dot"></span>
+          <span class="pin-dot"></span>
+        </div>
+        <div class="pin-keypad">
+          <button class="pin-key" data-digit="1">1</button>
+          <button class="pin-key" data-digit="2">2</button>
+          <button class="pin-key" data-digit="3">3</button>
+          <button class="pin-key" data-digit="4">4</button>
+          <button class="pin-key" data-digit="5">5</button>
+          <button class="pin-key" data-digit="6">6</button>
+          <button class="pin-key" data-digit="7">7</button>
+          <button class="pin-key" data-digit="8">8</button>
+          <button class="pin-key" data-digit="9">9</button>
+          <button id="pin-backspace" class="pin-key pin-key--ghost" aria-label="Hapus">
+            <i data-lucide="delete"></i>
+          </button>
+          <button class="pin-key" data-digit="0">0</button>
+          <div class="pin-key pin-key--spacer"></div>
+        </div>
+      </div>
     </div>
 
     <!-- FLIGHT HUD -->
     <div id="flight-hud" class="hidden">
-      <div id="hint-bubble" class="hint-bubble">Geser layar untuk terbang ✈️</div>
-      <div id="subtitle-box"><span id="subtitle-text"></span></div>
+      <div id="hint-bubble" class="hint-bubble">
+        <i data-lucide="hand" class="hint-icon"></i>
+        <span>Geser layar untuk terbang</span>
+      </div>
       <div id="distance-wrap">
-        <div id="distance-label">Menuju portal…</div>
+        <div id="distance-label">
+          <i data-lucide="orbit" class="distance-icon"></i>
+          <span>Menuju lubang hitam</span>
+        </div>
         <div id="distance-bar"><div id="distance-fill"></div></div>
       </div>
     </div>
 
     <audio id="bgm" preload="auto" loop src="assets/audio/music.mp3"></audio>
+    <audio id="plane-sfx" preload="auto" loop src="assets/audio/plane.mp3"></audio>
+    <audio id="gameover-sfx" preload="auto" loop src="assets/audio/gameover.mp3"></audio>
 
-    <!-- TAP TO START (unlocks audio + fullscreen gesture) -->
+    <!-- TAP TO START -->
     <div id="start-screen" class="hidden">
       <div class="start-card">
-        <div class="start-emoji">✈️🎂✨</div>
-        <h1>Birthday Flight</h1>
-        <p>Terbang menembus portal ajaib menuju kue ulang tahunmu.</p>
-        <button id="start-btn" class="big-btn">Mulai Terbang 🚀</button>
+        <div class="start-kicker">Sebuah perjalanan kecil, untukmu</div>
+        <h1 class="start-title">Birthday<br/>Flight</h1>
+        <p class="start-desc">Kemudikan pesawat menembus jalur bintang menuju lubang hitam, lalu sampai di sepotong langit tempat kue ulang tahunmu menunggu.</p>
+        <button id="start-btn" class="cta-btn">
+          <i data-lucide="plane-takeoff"></i>
+          <span>Mulai Terbang</span>
+        </button>
       </div>
     </div>
 
-    <!-- PORTAL TRANSITION FLASH -->
+    <!-- TRANSITION FLASH -->
     <div id="flash-overlay"></div>
 
     <!-- CANDLE / WISH UI -->
     <div id="candle-ui" class="hidden">
-      <div id="wish-title" class="wish-text">✨ MAKE A WISH ✨</div>
-      <div id="blow-title" class="wish-text hidden">💨 BLOW THE CANDLES 💨</div>
-      <button id="mic-btn" class="pill-btn hidden">🎤 Izinkan Mic untuk Meniup</button>
-      <button id="blow-btn" class="big-btn hidden">💨 TIUP LILIN</button>
+      <div id="light-title" class="wish-text">
+        <i data-lucide="flame" class="wish-icon"></i>
+        <span>Nyalakan Lilinnya</span>
+      </div>
+      <div id="wish-title" class="wish-text hidden">
+        <i data-lucide="sparkles" class="wish-icon"></i>
+        <span>Make a Wish</span>
+      </div>
+      <div id="blow-title" class="wish-text hidden">
+        <i data-lucide="wind" class="wish-icon"></i>
+        <span>Tiup Lilinnya</span>
+      </div>
+      <button id="light-btn" class="blow-btn" aria-label="Nyalakan lilin">
+        <i data-lucide="flame"></i>
+      </button>
+      <button id="mic-btn" class="ghost-btn hidden">
+        <i data-lucide="mic"></i>
+        <span>Izinkan mikrofon untuk meniup</span>
+      </button>
+      <button id="blow-btn" class="blow-btn hidden" aria-label="Tiup lilin">
+        <i data-lucide="wind"></i>
+      </button>
     </div>
 
     <!-- CELEBRATION -->
     <div id="celebration-ui" class="hidden">
-      <div class="celebrate-text line1">🎉 HAPPY BIRTHDAY 🎉</div>
-      <div class="celebrate-text line2">MAKE A WISH ✨</div>
-      <div class="celebrate-text line3">SEMOGA SEMUA IMPIANMU<br/>MENJADI KENYATAAN ❤️</div>
+      <div class="celebrate-text line1">Happy Birthday</div>
+      <div class="celebrate-text line2"><i data-lucide="heart"></i><span>Make a wish</span><i data-lucide="heart"></i></div>
+      <div class="celebrate-text line3">Semoga semua impianmu<br/>menjadi kenyataan</div>
+    </div>
+
+    <!-- GAME OVER -->
+    <div id="gameover-ui" class="hidden">
+      <div class="gameover-card">
+        <i data-lucide="compass" class="gameover-icon"></i>
+        <div class="gameover-title">Yahh, kamu keluar jalur..</div>
+        <p class="gameover-desc">Ikuti cahaya jalurnya pelan-pelan, jangan terlalu jauh melenceng ya.</p>
+        <button id="retry-btn" class="cta-btn cta-btn--ghost">
+          <i data-lucide="rotate-ccw"></i>
+          <span>Coba Lagi</span>
+        </button>
+      </div>
     </div>
 
     <div id="confetti-layer"></div>
 
   </div>
 
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script type="module" src="script.js"></script>
 </body>
 </html>
