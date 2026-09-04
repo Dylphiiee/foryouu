@@ -43,6 +43,7 @@ const ASSET_URLS = {
 };
 
 const PHASE = {
+  IDLE: 'idle',
   FLIGHT: 'flight',
   TRANSITION: 'transition',
   ARRIVAL: 'arrival',
@@ -86,7 +87,7 @@ let pointerStart = { x: 0, y: 0 };
 const keys = {};
 
 let totalDistance = 0;
-let phase = PHASE.FLIGHT;
+let phase = PHASE.IDLE; // becomes PHASE.FLIGHT only once "Mulai Terbang" is tapped
 
 let blackHoleGroup, diskMaterial, glowMaterial, lensingMaterial, photonSphereMaterial;
 let flightWorldGroup;
@@ -1861,6 +1862,7 @@ function runLoadingSequence() {
 
 document.getElementById('start-btn')?.addEventListener('click', startGame);
 function startGame() {
+  phase = PHASE.FLIGHT;
   document.getElementById('start-screen').classList.add('hidden');
   document.getElementById('flight-hud').classList.remove('hidden');
 
